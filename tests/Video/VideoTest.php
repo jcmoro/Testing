@@ -1,6 +1,12 @@
-use PHPUnit\Framework\TestCase;
-use Video;
+<?php
 
+namespace Video;
+
+use PHPUnit\Framework\TestCase;
+
+/**
+ * @author jcmoro <jcmorodiaz@gmail.com>
+ */
 class VideoTest extends TestCase
 {
     /**
@@ -8,8 +14,7 @@ class VideoTest extends TestCase
      */
     public function shouldCreateVideoWithTrueAutoplay()
     {
-        $video = new Video();
-        $video->changeAutoplay(true);
+        $video = new Video(true);
         static::assertTrue($video->autoplay());
         static::assertArrayHasKey('autoplay', $video->toArray());
     }
@@ -52,7 +57,7 @@ class VideoTest extends TestCase
      */
     public function shouldCreateVideoWithTruePlayInSitu()
     {
-        $video = new Video(true);
+        $video = new Video(\Video::DEFAULT_AUTOPLAY, true);
         static::assertTrue($video->playInSitu());
         static::assertArrayHasKey('playInSitu', $video->toArray());
     }
@@ -66,7 +71,7 @@ class VideoTest extends TestCase
      */
     public function invalidCreateVideoPlayInSituThrowsException($playInSitu)
     {
-        new Video($playInSitu);
+        new Video(\Video::DEFAULT_AUTOPLAY, $playInSitu);
     }
 
     /**

@@ -1,21 +1,30 @@
+<?php
+
+namespace Video;
+
 use Assert\Assertion;
 
+/**
+ * @author jcmoro <jcmorodiaz@gmail.com>
+ */
 class Video
 {
     /** @var bool */
-    private $autoplay = false;
+    private $autoplay;
 
     /** @var bool */
     private $playInSitu;
 
+    const DEFAULT_AUTOPLAY = false;
     const DEFAULT_PLAY_IN_SITU = false;
 
     /**
      * Video constructor.
      *
+     * @param bool $autoplay
      * @param bool $playInSitu
      */
-    public function __construct($playInSitu = self::DEFAULT_PLAY_IN_SITU)
+    public function __construct($autoplay = self::DEFAULT_AUTOPLAY, $playInSitu = self::DEFAULT_PLAY_IN_SITU)
     {
         $this->setPlayInSitu($playInSitu);
     }
@@ -23,7 +32,7 @@ class Video
     /**
      * @param bool $autoplay
      */
-    public function changeAutoplay($autoplay)
+    private function setAutoplay($autoplay)
     {
         Assertion::boolean($autoplay);
 
